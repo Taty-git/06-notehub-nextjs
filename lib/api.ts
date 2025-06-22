@@ -14,6 +14,7 @@ interface NewNote {
 axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 
 
+
 const URL = 'https://notehub-public.goit.study/api/notes';
 
 export const fetchNotes = async(query: string, page: number): Promise<NotesHttpResponse> => {
@@ -33,7 +34,7 @@ export const fetchNotes = async(query: string, page: number): Promise<NotesHttpR
 export const fetchNoteById = async (id: number): Promise<Note> => {
     const response = await axios.get<Note>(`/notes/${id}`, {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
+        Authorization: process.env.NEXT_PUBLIC_NOTEHUB_TOKEN,
       },
     });
     return response.data;
