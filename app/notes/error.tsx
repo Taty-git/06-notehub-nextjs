@@ -10,17 +10,15 @@ type ErrorProps = {
 const Error = ({ error, reset }: ErrorProps) => {
   return (
     <>
-      {error && (
-        <div className="error">
-          <p>
+    <div className={css.error}>
+        <p>
             Something went wrong. <br />
             {error.message}
-          </p>
-          <button className={css.button} onClick={() => reset()}>
+        </p>
+        <button className={css.button} onClick={() => reset()}>
             Спробувати ще раз
-          </button>
-        </div>
-      )}
+        </button>
+    </div>
     </>
   );
 };
