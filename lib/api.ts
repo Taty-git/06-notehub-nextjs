@@ -4,7 +4,7 @@ import type {Note} from '../types/note';
 interface NotesHttpResponse {
     notes: Note[];
     totalPages: number;
-};
+}
 
 interface NewNote {
     title: string;
@@ -14,14 +14,13 @@ interface NewNote {
 axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 
 
-const URL = 'https://notehub-public.goit.study/api/notes';
-
 export const fetchNotes = async(query: string, page: number): Promise<NotesHttpResponse> => {
-    const param = new URLSearchParams({...(query !=="" ? {search: query}: {}),
-    page: page.toString(),
-    })
+    const param = new URLSearchParams({
+        ...(query !== "" ? { search: query } : {}),
+        page: page.toString(),
+    });
     const response = await axios.get<NotesHttpResponse> (
-        `${URL}?${param}`,
+        `/notes?${param}`,
         {
             headers: {
                 Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
@@ -40,9 +39,7 @@ export const fetchNoteById = async (id: number): Promise<Note> => {
 };
   
 export const createNote = async(newNote: NewNote): Promise<Note> => {
-    const response = await axios.post<Note>(
-        `${URL}`, 
-        newNote, {
+    const response = await axios.post<Note>("/notes", newNote, {
             headers: {
                 Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
             },
@@ -52,7 +49,7 @@ export const createNote = async(newNote: NewNote): Promise<Note> => {
 };
 export const deleteNote = async(id: number): Promise<Note> => {
     const response = await axios.delete<Note>(
-        `${URL}/${id}`, {
+        `/notes/${id}`, {
             headers: {
                 Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
             },
