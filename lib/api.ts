@@ -24,7 +24,7 @@ export const fetchNotes = async(query: string, page: number): Promise<NotesHttpR
         `${URL}?${param}`,
         {
             headers: {
-                Authorization: process.env.NEXT_PUBLIC_NOTEHUB_TOKEN,
+                Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
             },
         }
     );
@@ -44,7 +44,7 @@ export const createNote = async(newNote: NewNote): Promise<Note> => {
         `${URL}`, 
         newNote, {
             headers: {
-                Authorization: process.env.NEXT_PUBLIC_NOTEHUB_TOKEN,
+                Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
             },
         }
     );
@@ -54,7 +54,7 @@ export const deleteNote = async(id: number): Promise<Note> => {
     const response = await axios.delete<Note>(
         `${URL}/${id}`, {
             headers: {
-                Authorization: process.env.NEXT_PUBLIC_NOTEHUB_TOKEN,
+                Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
             },
         }
     );
